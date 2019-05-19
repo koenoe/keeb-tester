@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { HashedModuleIdsPlugin } = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = require('./config.base.js')({
   mode: 'production',
@@ -92,6 +93,25 @@ module.exports = require('./config.base.js')({
       hashDigest: 'hex',
       hashDigestLength: 20,
     }),
+  ],
+
+  rules: [
+    {
+      test: /\.css$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            sourceMap: true,
+            importLoaders: 1,
+            localIdentName: '[local]--[hash:base64:5]', // TODO optimize this: https://medium.freecodecamp.org/reducing-css-bundle-size-70-by-cutting-the-class-names-and-using-scope-isolation-625440de600b
+          },
+        },
+        'postcss-loader',
+      ],
+    },
   ],
 
   performance: {

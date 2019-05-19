@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = require('./config.base.js')({
   mode: 'development',
@@ -35,6 +36,26 @@ module.exports = require('./config.base.js')({
       exclude: /a\.js|node_modules/, // exclude node_modules
       failOnError: false, // show a warning when there is a circular dependency
     }),
+  ],
+
+  rules: [
+    {
+      test: /\.css$/,
+      use: [
+        'css-hot-loader',
+        MiniCssExtractPlugin.loader,
+        'css-modules-flow-types-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            localIdentName: '[name]__[local]--[hash:base64:5]',
+            importLoaders: 1,
+          },
+        },
+        'postcss-loader',
+      ],
+    },
   ],
 
   // Emit a source map for easier debugging
