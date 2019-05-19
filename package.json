@@ -9,7 +9,8 @@
     "build": "NODE_ENV=production webpack -p --config ./webpack/config.prod.js",
     "build:open": "yarn build && http-server ./build -p 4000 -o",
     "clean-dist": "rimraf ./build && mkdir build",
-    "flow": "flow",
+    "flow": "flow check",
+    "flow:cover": "flow-coverage-report -i 'src/**/*.js'",
     "lint": "yarn lint:js",
     "lint:css": "stylelint \"src/**/*.css\"",
     "lint:js": "eslint \"src/**/*.js\"",
@@ -17,6 +18,8 @@
     "serve": "webpack-dev-server --port 3000 --log-level error --config ./webpack/config.dev.js",
     "start": "concurrently -k -r -s first \"yarn serve\"",
     "test": "jest --passWithNoTests",
+    "test:cover": "yarn test --coverage",
+    "test:coveralls": "yarn test:cover && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "yarn test --watch"
   },
   "dependencies": {
@@ -41,6 +44,7 @@
     "compression-webpack-plugin": "2.0.0",
     "concurrently": "4.1.0",
     "copy-webpack-plugin": "5.0.3",
+    "coveralls": "3.0.3",
     "css-hot-loader": "1.4.4",
     "css-modules-flow-types-loader": "1.2.0",
     "enzyme": "3.9.0",
