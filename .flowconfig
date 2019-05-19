@@ -10,6 +10,7 @@ flow-typed
 flow
 
 [lints]
+deprecated-utility=off
 
 [options]
 ; Folders

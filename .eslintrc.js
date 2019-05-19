@@ -24,8 +24,10 @@ module.exports = {
     },
   },
   rules: {
-    'react/jsx-filename-extension': 0,
+    'import/extensions': ['error', 'always', { ignorePackages: true }],
+    'import/no-extraneous-dependencies': 0,
     'prettier/prettier': ['error', prettierOptions],
+    'react/jsx-filename-extension': 0,
   },
   settings: {
     'import/resolver': {

@@ -1,21 +1,51 @@
 // @flow
-// Needed for redux-saga es6 generator support
 import '@babel/polyfill';
 
 import React from 'react';
 import { render } from 'react-dom';
-// import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import { Switch, Route, Link } from 'react-router-dom';
 
-render(<div>koen</div>, (document.getElementById('root'): any));
+import configureStore from 'state/configureStore.js';
+import history from 'utils/history.js';
 
-// if (module.hot) {
-//   module.hot.accept('components/Root', (): void => {
-//     const NewRoot: any = require('components/Root').default; // eslint-disable-line global-require
-//     render(
-//       <AppContainer>
-//         <NewRoot store={store} history={history} />
-//       </AppContainer>,
-//       (document.getElementById('root'): any),
-//     );
-//   });
-// }
+const initialState = {};
+const store = configureStore(initialState);
+
+render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <div>
+              Home: <Link to="/foo">Foo</Link>
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/foo"
+          render={() => (
+            <div>
+              Foo: <Link to="/bar">Bar</Link>
+            </div>
+          )}
+        />
+        <Route
+          exact
+          path="/bar"
+          render={() => (
+            <div>
+              Bar: <Link to="/">back to Home</Link>
+            </div>
+          )}
+        />
+      </Switch>
+    </ConnectedRouter>
+  </Provider>,
+  (document.getElementById('root'): any),
+);
