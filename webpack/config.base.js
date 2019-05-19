@@ -6,17 +6,16 @@ module.exports = options => ({
   entry: options.entry,
   output: Object.assign(
     {
-      // Compile into js/build.js
       path: path.resolve(process.cwd(), 'build'),
       publicPath: '/',
     },
     options.output,
-  ), // Merge with env dependent settings
+  ),
   optimization: options.optimization,
   module: {
     rules: options.rules.concat([
       {
-        test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -54,11 +53,8 @@ module.exports = options => ({
             loader: 'image-webpack-loader',
             options: {
               mozjpeg: {
-                enabled: false,
-                // NOTE: mozjpeg is disabled as it causes errors in some Linux environments
-                // Try enabling it in your environment by switching the config to:
-                // enabled: true,
-                // progressive: true,
+                enabled: true,
+                progressive: true,
               },
               gifsicle: {
                 interlaced: false,

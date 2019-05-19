@@ -16,8 +16,8 @@
     "prebuild": "yarn lint && yarn clean-dist",
     "serve": "webpack-dev-server --port 3000 --log-level error --config ./webpack/config.dev.js",
     "start": "concurrently -k -r -s first \"yarn serve\"",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --passWithNoTests",
+    "test:watch": "yarn test --watch"
   },
   "dependencies": {
     "@babel/polyfill": "7.4.4",
