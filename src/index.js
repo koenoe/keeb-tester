@@ -6,7 +6,7 @@ import React from 'react';
 import { render } from 'react-dom';
 // import { AppContainer } from 'react-hot-loader';
 
-render(<div>hoi</div>, (document.getElementById('root'): any));
+render(<div>koen</div>, (document.getElementById('root'): any));
 
 // if (module.hot) {
 //   module.hot.accept('components/Root', (): void => {

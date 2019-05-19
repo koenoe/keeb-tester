@@ -7,9 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = require('./config.base.js')({
   mode: 'development',
 
-  // Add hot reloading in development
   entry: [
-    'webpack-hot-middleware/client?reload=true',
     path.join(process.cwd(), 'src/index.js'),
   ],
 

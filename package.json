@@ -15,7 +15,7 @@
     "lint:css": "stylelint \"src/**/*.css\"",
     "lint:js": "eslint \"src/**/*.js\"",
     "prebuild": "yarn lint && yarn clean-dist",
-    "serve": "webpack-dev-server --port 3000 --log-level error --config ./webpack/config.dev.js",
+    "serve": "webpack-dev-server --port 3000 --config ./webpack/config.dev.js --log-level error --hot",
     "start": "concurrently -k -r -s first \"yarn serve\"",
     "test": "jest --passWithNoTests",
     "test:cover": "yarn test --coverage",
