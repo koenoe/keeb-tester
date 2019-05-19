@@ -3,7 +3,6 @@ module.exports = {
   env: {
     test: {
       plugins: [
-        'styled-components',
         '@babel/plugin-proposal-class-properties',
         '@babel/plugin-syntax-dynamic-import',
       ],

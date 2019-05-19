@@ -8,7 +8,7 @@ const prettierOptions = JSON.parse(
 module.exports = {
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', 'flowtype'],
+  plugins: ['prettier', 'redux-saga', 'react', 'react-hooks', 'jsx-a11y', 'flowtype'],
   env: {
     jest: true,
     browser: true,
