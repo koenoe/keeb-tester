@@ -1,7 +1,8 @@
 const cssnanoConfig = {
   autoprefixer: false, // Comes with cssnext already
-  // zindex: false, // cssnano couldn't handle x-index correctly
-  // reduceIdents: false, // cssnano interfered and made bugs related to keyframe naming
+  discardUnused: true,
+  reduceIdents: false,
+  zindex: false,
 };
 
 module.exports = () => ({
@@ -9,7 +10,7 @@ module.exports = () => ({
     'postcss-import': {
       addModulesDirectories: ['.'],
     },
-    'postcss-cssnext': {},
+    'postcss-preset-env': {},
     'postcss-flexbugs-fixes': {},
     cssnano: cssnanoConfig,
   },
