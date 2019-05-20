@@ -8,7 +8,7 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import configureStore from 'state/configureStore.js';
 import history from 'utils/history.js';
-import App from 'containers/app.js';
+import App from 'containers/app/app.js';
 
 import type { Store } from 'state/configureStore.js';
 

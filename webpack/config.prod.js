@@ -93,6 +93,10 @@ module.exports = require('./config.base.js')({
       hashDigest: 'hex',
       hashDigestLength: 20,
     }),
+
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'production',
+    }),
   ],
 
   rules: [
