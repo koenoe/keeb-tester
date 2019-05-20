@@ -1,6 +1,8 @@
 // @flow
+import type { Router } from 'connected-react-router';
+
 export type State = {
-  router: any,
+  router: Router,
 };
 
 export const initialState: State = {};
