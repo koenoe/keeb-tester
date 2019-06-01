@@ -2,11 +2,12 @@
 import { put, takeEvery } from 'redux-saga/effects'; // eslint-disable-line import/extensions
 import * as actions from 'state/keyboard/actions.js';
 
+import type { Saga } from 'redux-saga';
 import type { SetKeyboardFromJsonAction } from 'state/keyboard/actions.js';
 
 export function* setKeyboardFromJson(
   action: SetKeyboardFromJsonAction,
-): Generator<any, void, any> {
+): Saga<void> {
   const json = JSON.parse(action.rawJson);
   const keycaps = json.filter(row => row instanceof Array);
   const firstRow = json.shift();
