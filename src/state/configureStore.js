@@ -5,12 +5,14 @@ import createSagaMiddleware from 'redux-saga';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import createReducer from 'state/reducers.js';
 import history from 'utils/history.js';
-import { initialState } from 'state/state.js';
-
 import type { Store as ReduxStore } from 'redux';
-import type { State } from 'state/state.js';
+
+import rootSaga from './rootSaga.js';
+import { initialState } from './state.js';
+import createReducer from './reducers.js';
+
+import type { State } from './state.js';
 
 type Action = { type: string };
 export type Store = ReduxStore<State, Action>;
@@ -51,6 +53,8 @@ export default function configureStore(): Store {
     initialState,
     composeEnhancers(applyMiddleware(...middlewares)),
   );
+
+  sagaMiddleware.run(rootSaga);
 
   // $FlowFixMe
   if (module.hot) {
