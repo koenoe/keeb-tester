@@ -4,6 +4,24 @@ type KeyboardBackground = $ReadOnly<{|
   style: string,
 |}>;
 
+/*
+  If a keycap has multiple legends, each legend is separated by a newline character \n. The order of legend positions is as follows:
+  ---------------
+  "top left\n
+  bottom left\n
+  top right\n
+  bottom right\n
+  front left\n
+  front right\n
+  center left\n
+  center right\n
+  top center\n
+  center\n
+  bottom center\n
+  front center"
+  ----------------
+  The string of the keycap is cut off at the last non-empty legend. For example, a keycap that is labeled 'Q' at the top left and '1' at the top right is encoded by the string "Q\n\n1".
+*/
 type KeycapLegendAlignment =
   | 'top-left'
   | 'bottom-left'
@@ -18,22 +36,27 @@ type KeycapLegendAlignment =
   | 'bottom-center'
   | 'front-center';
 
-type KeycapLegend = $ReadOnly<{|
+export type KeycapLegend = $ReadOnly<{|
   label: string,
   alignment: KeycapLegendAlignment,
 |}>;
 
+export type KeycapLegends = $ReadOnlyArray<KeycapLegend>;
+
 export type Keycap = $ReadOnly<{|
   backgroundColor: string,
   color: string,
-  fontHeight2: number,
-  fontHeight: number,
+  fontSize2: number,
+  fontSize: number,
   ghosted: boolean,
   height: number,
   height2?: number,
   homing: boolean,
-  legends: $ReadOnlyArray<KeycapLegend>,
+  legends: KeycapLegends,
   profile: string,
+  rotationAngle?: number,
+  rotationX?: number,
+  rotationY?: number,
   stepped: boolean,
   width: number,
   width2?: number,
@@ -42,6 +65,29 @@ export type Keycap = $ReadOnly<{|
   y: number,
   y2?: number,
 |}>;
+
+export function createKeycap(additions?: $Shape<Keycap>): Keycap {
+  const required = {
+    backgroundColor: '',
+    color: '',
+    fontSize2: 0,
+    fontSize: 0,
+    ghosted: false,
+    height: 0,
+    homing: false,
+    legends: [],
+    profile: '',
+    stepped: false,
+    width: 0,
+    x: 0,
+    y: 0,
+  };
+
+  return {
+    ...required,
+    ...(additions !== undefined ? additions : {}),
+  };
+}
 
 export type Keycaps = $ReadOnlyArray<Keycap>;
 export type KeyboardState = $ReadOnly<{|
