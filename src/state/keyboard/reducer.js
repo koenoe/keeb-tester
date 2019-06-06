@@ -23,7 +23,7 @@ function extractKeycapsFromRows(
     fontSize2: 0,
     fontSize: 0,
     ghosted: false,
-    height: 0,
+    height: 1,
     height2: 0,
     homing: false,
     legends: [],
@@ -32,7 +32,7 @@ function extractKeycapsFromRows(
     rotationX: 0,
     rotationY: 0,
     stepped: false,
-    width: 0,
+    width: 1,
     width2: 0,
     x: 0,
     x2: 0,
@@ -50,8 +50,8 @@ function extractKeycapsFromRows(
         keycaps.push(keycap);
 
         // Set up for the next key
-        current.x += current.width;
         current.width = current.height || 1;
+        current.x += current.width;
         current.x2 = current.y2 || current.width2 || current.height2 || 0;
       } else {
         if (key.f) current.fontSize = key.f;
@@ -75,6 +75,7 @@ function extractKeycapsFromRows(
             current.width2 === 0 ? current.width : current.width2;
         }
         if (key.l) current.stepped = key.l;
+        if (key.n) current.homing = key.n;
       }
     });
     current.x = 0;
@@ -90,6 +91,7 @@ function extractKeyboardFromJson(rawJson: string): KeyboardState {
   const keycaps: Keycaps = extractKeycapsFromRows(rows);
 
   return {
+    keycaps,
     ...(firstRow.author && { author: firstRow.author }),
     ...(firstRow.background && { background: firstRow.background }),
     ...(firstRow.backcolor && {
@@ -97,7 +99,6 @@ function extractKeyboardFromJson(rawJson: string): KeyboardState {
     }),
     ...(firstRow.radii && { borderRadius: firstRow.radii }),
     ...(firstRow.name && { name: firstRow.name }),
-    keycaps,
   };
 }
 
