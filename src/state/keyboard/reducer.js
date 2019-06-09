@@ -1,6 +1,10 @@
 // @flow
 import * as actions from './actions.js';
-import { initialState as initialKeyboardState, createKeycap } from './state.js';
+import {
+  initialState as initialKeyboardState,
+  createKeycap,
+  KEYCAP_SIZE,
+} from './state.js';
 import type {
   Keyboard,
   KeyboardState,
@@ -11,6 +15,8 @@ import type {
   Keycaps,
 } from './state.js';
 import type { Action } from './actions.js';
+
+type Rows = $ReadOnlyArray<Array<string | Object>>;
 
 const LEGEND_ALIGNMENTS: $ReadOnlyArray<KeycapLegendAlignment> = [
   'top-left',
@@ -52,10 +58,9 @@ function extractLegendsFromKey(key: string): KeycapLegends {
     }))
     .filter(legend => Boolean(legend.label));
 }
+
 // Heavily inspired by: https://github.com/CQCumbers/kle_render/blob/master/keyboard.py#L93-L172
-function extractKeycapsFromRows(
-  rows: $ReadOnlyArray<Array<string | Object>>,
-): Keycaps {
+function extractKeycapsFromRows(rows: Rows): Keycaps {
   const current = {
     alignment: null,
     backgroundColor: '',
@@ -130,6 +135,32 @@ function extractKeycapsFromRows(
   return keycaps;
 }
 
+function filterKeyboardRows(rows: Rows): $ReadOnlyArray<Array<string>> {
+  return rows.map(row => row.filter(key => typeof key === 'string'));
+}
+
+function extractKeyboardHeightFromRows(rows: Rows): number {
+  return filterKeyboardRows(rows).length * KEYCAP_SIZE;
+}
+
+function extractKeyboardWidthFromRows(rows: Rows): number {
+  const longestRow = rows.reduce((a, b) => {
+    return a.length > b.length ? a : b;
+  });
+  let totalWidth = 0;
+  let width = 1;
+  longestRow.forEach(key => {
+    if (typeof key === 'string') {
+      totalWidth += width || 1;
+      width = 1;
+    } else {
+      if (key.w) width = key.w;
+      if (key.x) width += key.x;
+    }
+  });
+  return totalWidth * KEYCAP_SIZE;
+}
+
 function extractKeyboardFromJson(rawJson: string): Keyboard {
   const json = JSON.parse(rawJson);
   const rows = json.filter(row => row instanceof Array);
@@ -140,11 +171,11 @@ function extractKeyboardFromJson(rawJson: string): Keyboard {
     keycaps,
     ...(firstRow.author && { author: firstRow.author }),
     ...(firstRow.background && { background: firstRow.background }),
-    ...(firstRow.backcolor && {
-      backgroundColor: firstRow.backcolor,
-    }),
-    ...(firstRow.radii && { borderRadius: firstRow.radii }),
+    backgroundColor: firstRow.backcolor || '#eeeeee',
+    borderRadius: firstRow.radii || 6,
     ...(firstRow.name && { name: firstRow.name }),
+    height: extractKeyboardHeightFromRows(rows),
+    width: extractKeyboardWidthFromRows(rows),
   };
 }
 

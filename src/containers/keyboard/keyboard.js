@@ -7,12 +7,12 @@ import * as keyboardSelectors from 'state/keyboard/selectors.js';
 import Keycap from 'components/keycap/keycap.js';
 
 import type { State } from 'state/state.js';
-import type { Keycaps } from 'state/keyboard/state.js';
+import type { Keyboard as KeyboardState } from 'state/keyboard/state.js';
 
 import styles from './keyboard.css';
 
 type OutProps = {|
-  keycaps: Keycaps,
+  keyboard: ?KeyboardState,
 |};
 
 type Props = $ReadOnly<{| ...OutProps |}>;
@@ -22,18 +22,23 @@ const mapStateToProps: OutputSelector<
   any,
   OutProps,
 > = createStructuredSelector({
-  keycaps: keyboardSelectors.activeKeyboardKeycaps,
+  keyboard: keyboardSelectors.activeKeyboard,
 });
 
 function Keyboard(props: Props) {
-  const { keycaps } = props;
+  const { keyboard } = props;
 
-  if (keycaps.length === 0) {
+  if (!keyboard) {
     return null;
   }
 
+  const { keycaps, width, height, backgroundColor, borderRadius } = keyboard;
+
   return (
-    <div className={styles.keyboard}>
+    <div
+      className={styles.keyboard}
+      style={{ width, height, backgroundColor, borderRadius }}
+    >
       <div className={styles.keycaps}>
         {keycaps.map((keycap, index) => (
           <Keycap

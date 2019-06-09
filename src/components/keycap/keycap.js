@@ -2,12 +2,12 @@
 import React from 'react';
 import Color from 'color';
 import classNames from 'classnames';
+import { KEYCAP_SIZE } from 'state/keyboard/state.js';
 
 import type { Keycap as Props } from 'state/keyboard/state.js';
 // import type { Node } from 'react';
 import styles from './keycap.css';
 
-const KEYCAP_SIZE = 54;
 const KEYCAP_MARGINS = [3, 6, 10, 6];
 
 function toPixels(value: number): number {

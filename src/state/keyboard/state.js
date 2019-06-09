@@ -102,10 +102,12 @@ export type Keycaps = $ReadOnlyArray<Keycap>;
 export type Keyboard = $ReadOnly<{|
   author?: string,
   background?: KeyboardBackground,
-  backgroundColor?: string,
-  borderRadius?: string,
+  backgroundColor: string,
+  borderRadius: string,
   keycaps: Keycaps,
   name?: string,
+  height: number,
+  width: number,
 |}>;
 
 export type KeyboardState = $ReadOnly<{|
@@ -117,3 +119,5 @@ export const initialState: KeyboardState = {
   active: null,
   presets: [],
 };
+
+export const KEYCAP_SIZE = 54; // Keycap size in pixels
