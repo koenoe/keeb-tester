@@ -34,13 +34,15 @@ function Keyboard(props: Props) {
 
   return (
     <div className={styles.keyboard}>
-      {keycaps.map((keycap, index) => (
-        <Keycap
-          // eslint-disable-next-line react/no-array-index-key
-          key={index}
-          {...keycap}
-        />
-      ))}
+      <div className={styles.keycaps}>
+        {keycaps.map((keycap, index) => (
+          <Keycap
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            {...keycap}
+          />
+        ))}
+      </div>
     </div>
   );
 }

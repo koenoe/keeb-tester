@@ -4,4 +4,12 @@
   padding: 10px;
   background: #eee;
   border-radius: 6px;
+  /* TODO, only static for now */
+  height: 300px;
+  width: 830px;
+  margin: auto;
+}
+
+.keycaps {
+  position: relative;
 }
