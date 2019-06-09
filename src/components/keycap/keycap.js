@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import Color from 'color';
 
 import type { Keycap as Props } from 'state/keyboard/state.js';
 // import type { Node } from 'react';
@@ -18,12 +19,12 @@ function toPixels(value: number): number {
 
 export default function Keycap(props: Props) {
   const {
-    backgroundColor,
     color,
     // fontSize,
     height,
     height2,
     legends,
+    stepped,
     width,
     width2,
     x,
@@ -33,6 +34,8 @@ export default function Keycap(props: Props) {
   } = props;
 
   const [marginTop, marginRight, marginBottom, marginLeft] = KEYCAP_MARGINS;
+  const backgroundColor = props.backgroundColor || '#cccccc';
+  const backgroundColorLight = Color(backgroundColor).lighten(0.25);
 
   return (
     <div
@@ -77,18 +80,18 @@ export default function Keycap(props: Props) {
       <div
         className={styles.keycap}
         style={{
-          backgroundColor,
+          backgroundColor: backgroundColorLight,
           marginTop,
           marginRight,
           marginBottom,
           marginLeft,
         }}
       />
-      {width2 && height2 ? (
+      {width2 && height2 && !stepped ? (
         <div
           className={styles.keycap}
           style={{
-            backgroundColor,
+            backgroundColor: backgroundColorLight,
             height: toPixels(height2) - marginTop - marginBottom,
             left: toPixels(x2 || 0) + marginLeft,
             top: toPixels(y2 || 0) + marginTop,

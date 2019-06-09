@@ -25,6 +25,7 @@
   "dependencies": {
     "@babel/polyfill": "7.4.4",
     "classnames": "2.2.6",
+    "color": "3.1.2",
     "connected-react-router": "6.4.0",
     "history": "4.9.0",
     "immer": "3.1.2",
