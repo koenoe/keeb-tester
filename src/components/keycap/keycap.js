@@ -7,20 +7,20 @@ import type { Keycap as Props } from 'state/keyboard/state.js';
 import styles from './keycap.css';
 
 const KEYCAP_SIZE = 54;
-const KEYCAP_MARGINS = [3, 6, 6, 6];
+const KEYCAP_MARGINS = [3, 6, 10, 6];
 
 function toPixels(value: number): number {
   return value * KEYCAP_SIZE;
 }
 
-// function toFontSize(value: number): number {
-//   return value;
-// }
+function toFontSize(value: number): number {
+  return 6 + 2 * value;
+}
 
 export default function Keycap(props: Props) {
   const {
     color,
-    // fontSize,
+    fontSize,
     height,
     height2,
     legends,
@@ -102,8 +102,10 @@ export default function Keycap(props: Props) {
       <div
         className={styles.legends}
         style={{
-          color,
-          // ...(fontSize && { fontSize: toFontSize(fontSize) }),
+          marginTop,
+          marginRight,
+          marginBottom,
+          marginLeft,
         }}
       >
         {legends.map(legend => (
@@ -111,6 +113,12 @@ export default function Keycap(props: Props) {
             key={legend.label}
             className={styles[legend.alignment]}
             dangerouslySetInnerHTML={{ __html: legend.label }}
+            style={{
+              color: color || '#000000',
+              fontSize: legend.alignment.startsWith('front-')
+                ? 10
+                : toFontSize(fontSize || 3),
+            }}
           />
         ))}
       </div>

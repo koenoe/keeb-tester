@@ -42,6 +42,7 @@ function extractKeycapsFromRows(
   rows: $ReadOnlyArray<Array<string | Object>>,
 ): Keycaps {
   const current = {
+    align: 0,
     backgroundColor: '',
     color: '',
     fontSize2: 0,
@@ -82,6 +83,7 @@ function extractKeycapsFromRows(
         current.width2 = 0;
         current.height2 = 0;
       } else {
+        if (key.a) current.align = key.a;
         if (key.f) current.fontSize = key.f;
         if (key.f2) current.fontSize2 = key.f2;
         if (key.p) current.profile = key.p;

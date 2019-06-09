@@ -44,6 +44,7 @@ export type KeycapLegend = $ReadOnly<{|
 export type KeycapLegends = $ReadOnlyArray<KeycapLegend>;
 
 export type Keycap = $ReadOnly<{|
+  align?: number,
   backgroundColor: string,
   color: string,
   fontSize2: number,
