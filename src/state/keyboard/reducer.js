@@ -19,7 +19,7 @@ function extractLegendsFromKey(key: string): KeycapLegends {
     };
   });
 }
-
+// Heavily inspired by: https://github.com/CQCumbers/kle_render/blob/master/keyboard.py#L93-L172
 function extractKeycapsFromRows(
   rows: $ReadOnlyArray<Array<string | Object>>,
 ): Keycaps {
@@ -56,8 +56,8 @@ function extractKeycapsFromRows(
         keycaps.push(keycap);
 
         // Set up for the next key
-        current.width = current.height || 1;
         current.x += current.width;
+        current.width = current.height || 1;
         current.x2 = current.y2 || current.width2 || current.height2 || 0;
       } else {
         if (key.f) current.fontSize = key.f;
