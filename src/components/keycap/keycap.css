@@ -1,15 +1,51 @@
 .keycap {
-  background-color: white;
+  background-color: #fff;
   border-radius: 6px;
-  border: 1px solid black;
+  border: 1px solid #000;
   box-shadow: inset 6px 3px 0 #ccc, inset -6px -6px 0 #ccc, inset 6px -6px 0 #ccc, inset -6px 3px 0 #ccc;
   box-sizing: border-box;
-  color: black;
+  color: #000;
   contain: strict;
   display: inline-block;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
   position: absolute;
-  transition: box-shadow 50ms ease;
   user-select: none;
+}
+
+.keycap:active {
+  background-color: #eee;
+  box-shadow: inset 6px 6px 0 #bbb, inset -6px -6px 0 #bbb, inset 6px -6px 0 #bbb, inset -6px 6px 0 #bbb;
+}
+
+.keycap span {
+  position: absolute;
+}
+
+.top-left,
+.front-left, /* TODO */
+.front-right, /* TODO */
+.center-left, /* TODO */
+.center-right, /* TODO */
+.top-center, /* TODO */
+.center, /* TODO */
+.bottom-center, /* TODO */
+.front-center { /* TODO */
+  top: 6px;
+  left: 9px;
+}
+
+.bottom-left {
+  left: 9px;
+  bottom: 6px;
+}
+
+.top-right {
+  top: 6px;
+  right: 9px;
+}
+
+.bottom-right {
+  right: 9px;
+  bottom: 6px;
 }

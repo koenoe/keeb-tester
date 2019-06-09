@@ -39,7 +39,11 @@ export default function Keycap(props: Props) {
         width: toPixels(width),
       }}
     >
-      {legends[0] ? legends[0].label : ''}
+      {legends.map(legend => (
+        <span key={legend.label} className={styles[legend.alignment]}>
+          {legend.label}
+        </span>
+      ))}
     </div>
   );
 }
