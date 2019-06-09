@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector, type OutputSelector } from 'reselect';
 import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
-// import Keycap from 'components/keycap/keycap.js';
+import Keycap from 'components/keycap/keycap.js';
 
 import type { State } from 'state/state.js';
 import type { Keycaps } from 'state/keyboard/state.js';
@@ -33,26 +33,14 @@ function Keyboard(props: Props) {
   }
 
   return (
-    <div className={styles.container}>
-      {/* <div className={styles.keyboard}>
-        {keycaps.map((row, rowIndex) => (
+    <div className={styles.keyboard}>
+      {keycaps.map((keycap, index) => (
+        <Keycap
           // eslint-disable-next-line react/no-array-index-key
-          <div className={styles.row} key={rowIndex}>
-            {row.map((keycap, index) =>
-              typeof keycap === 'string' ? (
-                <Keycap
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={index}
-                  label={keycap}
-                  properties={
-                    typeof row[index - 1] === 'string' ? null : row[index - 1]
-                  }
-                />
-              ) : null,
-            )}
-          </div>
-        ))}
-      </div> */}
+          key={index}
+          {...keycap}
+        />
+      ))}
     </div>
   );
 }

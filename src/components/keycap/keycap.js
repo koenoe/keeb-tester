@@ -4,14 +4,42 @@ import React from 'react';
 import type { Keycap as Props } from 'state/keyboard/state.js';
 import styles from './keycap.css';
 
-// const width = 54;
+const KEYCAP_SIZE = 54;
+
+function toPixels(value: number): number {
+  return value * KEYCAP_SIZE;
+}
+
+// function toFontSize(value: number): number {
+//   return value;
+// }
 
 export default function Keycap(props: Props) {
-  console.log(props);
-  // const { label, properties } = props;
-  // const legends = label.includes('\n')
-  //   ? label.split('\n').filter(value => value !== '')
-  //   : [label];
+  const {
+    backgroundColor,
+    color,
+    // fontSize,
+    height,
+    legends,
+    width,
+    x,
+    y,
+  } = props;
 
-  return <div className={styles.keycap}>A</div>;
+  return (
+    <div
+      className={styles.keycap}
+      style={{
+        backgroundColor,
+        color,
+        // ...(fontSize && { fontSize: toFontSize(fontSize) }),
+        height: toPixels(height),
+        left: toPixels(x),
+        top: toPixels(y),
+        width: toPixels(width),
+      }}
+    >
+      {legends[0] ? legends[0].label : ''}
+    </div>
+  );
 }
