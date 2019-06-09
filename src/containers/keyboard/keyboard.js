@@ -22,7 +22,7 @@ const mapStateToProps: OutputSelector<
   any,
   OutProps,
 > = createStructuredSelector({
-  keycaps: keyboardSelectors.keycaps,
+  keycaps: keyboardSelectors.activeKeyboardKeycaps,
 });
 
 function Keyboard(props: Props) {

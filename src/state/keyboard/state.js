@@ -90,7 +90,7 @@ export function createKeycap(additions?: $Shape<Keycap>): Keycap {
 }
 
 export type Keycaps = $ReadOnlyArray<Keycap>;
-export type KeyboardState = $ReadOnly<{|
+export type Keyboard = $ReadOnly<{|
   author?: string,
   background?: KeyboardBackground,
   backgroundColor?: string,
@@ -99,6 +99,12 @@ export type KeyboardState = $ReadOnly<{|
   name?: string,
 |}>;
 
+export type KeyboardState = $ReadOnly<{|
+  active: ?Keyboard,
+  presets: $ReadOnlyArray<Keyboard>,
+|}>;
+
 export const initialState: KeyboardState = {
-  keycaps: [],
+  active: null,
+  presets: [],
 };

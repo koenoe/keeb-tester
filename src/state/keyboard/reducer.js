@@ -1,7 +1,13 @@
 // @flow
 import * as actions from './actions.js';
 import { initialState as initialKeyboardState, createKeycap } from './state.js';
-import type { KeyboardState, Keycap, Keycaps, KeycapLegends } from './state.js';
+import type {
+  Keyboard,
+  KeyboardState,
+  Keycap,
+  KeycapLegends,
+  Keycaps,
+} from './state.js';
 import type { Action } from './actions.js';
 
 function extractLegendsFromKey(key: string): KeycapLegends {
@@ -84,7 +90,7 @@ function extractKeycapsFromRows(
   return keycaps;
 }
 
-function extractKeyboardFromJson(rawJson: string): KeyboardState {
+function extractKeyboardFromJson(rawJson: string): Keyboard {
   const json = JSON.parse(rawJson);
   const rows = json.filter(row => row instanceof Array);
   const firstRow = json.shift();
@@ -112,28 +118,19 @@ export default function keyboardReducer(
 
   switch (action.type) {
     case actions.SET_KEYBOARD_FROM_JSON: {
-      const {
-        author,
-        background,
-        backgroundColor,
-        borderRadius,
-        keycaps,
-        name,
-      }: KeyboardState = extractKeyboardFromJson(action.rawJson);
+      const keyboard: Keyboard = extractKeyboardFromJson(action.rawJson);
 
       return {
         ...state,
-        author,
-        background,
-        backgroundColor,
-        borderRadius,
-        keycaps,
-        name,
+        active: keyboard,
       };
     }
 
     case actions.RESET_KEYBOARD:
-      return initialKeyboardState;
+      return {
+        ...state,
+        active: null,
+      };
 
     default:
       return state;
