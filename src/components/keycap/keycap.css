@@ -2,8 +2,7 @@
   background-color: #fff;
   border-radius: 6px;
   border: 1px solid #000;
-  box-shadow: inset 6px 3px 0 #ccc, inset -6px -6px 0 #ccc, inset 6px -6px 0 #ccc, inset -6px 3px 0 #ccc;
-  box-sizing: border-box;
+  /* box-shadow: inset 6px 3px 0 #ccc, inset -6px -6px 0 #ccc, inset 6px -6px 0 #ccc, inset -6px 3px 0 #ccc; */
   color: #000;
   contain: strict;
   display: inline-block;
@@ -11,11 +10,13 @@
   font-size: 12px;
   position: absolute;
   user-select: none;
+  box-sizing: border-box;
+  background-clip: padding-box;
 }
 
 .keycap:active {
   background-color: #eee;
-  box-shadow: inset 6px 6px 0 #bbb, inset -6px -6px 0 #bbb, inset 6px -6px 0 #bbb, inset -6px 6px 0 #bbb;
+  /* box-shadow: inset 6px 6px 0 #bbb, inset -6px -6px 0 #bbb, inset 6px -6px 0 #bbb, inset -6px 6px 0 #bbb; */
 }
 
 .keycap span {

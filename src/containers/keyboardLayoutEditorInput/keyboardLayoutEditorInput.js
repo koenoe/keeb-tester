@@ -83,7 +83,7 @@ function KeyboardLayoutEditorInput(props: Props) {
     <div className={styles.container}>
       <input type="file" accept=".json" onChange={handleChange} />
       {error && <p>{error.toString()}</p>}
-      {/* {value && <pre>{value}</pre>} */}
+      {value && <pre>{value}</pre>}
     </div>
   );
 }

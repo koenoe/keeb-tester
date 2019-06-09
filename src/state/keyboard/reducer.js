@@ -5,19 +5,37 @@ import type {
   Keyboard,
   KeyboardState,
   Keycap,
+  KeycapLegendAlignment,
   KeycapLegends,
   Keycaps,
 } from './state.js';
 import type { Action } from './actions.js';
 
+const LEGEND_ALIGNMENTS: $ReadOnlyArray<KeycapLegendAlignment> = [
+  'top-left',
+  'bottom-left',
+  'top-right',
+  'bottom-right',
+  'front-left',
+  'front-right',
+  'center-left',
+  'center-right',
+  'top-center',
+  'center',
+  'bottom-center',
+  'front-center',
+];
+
 function extractLegendsFromKey(key: string): KeycapLegends {
   const legends = key.split('\n');
-  return legends.map(legend => {
-    return {
-      label: legend,
-      alignment: 'top-left',
-    };
-  });
+  return legends
+    .map((legend, index) => {
+      return {
+        label: legend,
+        alignment: LEGEND_ALIGNMENTS[index],
+      };
+    })
+    .filter(legend => Boolean(legend.label));
 }
 // Heavily inspired by: https://github.com/CQCumbers/kle_render/blob/master/keyboard.py#L93-L172
 function extractKeycapsFromRows(
@@ -57,8 +75,12 @@ function extractKeycapsFromRows(
 
         // Set up for the next key
         current.x += current.width;
-        current.width = current.height || 1;
-        current.x2 = current.y2 || current.width2 || current.height2 || 0;
+        current.width = 1;
+        current.height = 1;
+        current.x2 = 0;
+        current.y2 = 0;
+        current.width2 = 0;
+        current.height2 = 0;
       } else {
         if (key.f) current.fontSize = key.f;
         if (key.f2) current.fontSize2 = key.f2;

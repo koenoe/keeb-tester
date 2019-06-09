@@ -40,9 +40,11 @@ export default function Keycap(props: Props) {
       }}
     >
       {legends.map(legend => (
-        <span key={legend.label} className={styles[legend.alignment]}>
-          {legend.label}
-        </span>
+        <span
+          key={legend.label}
+          className={styles[legend.alignment]}
+          dangerouslySetInnerHTML={{ __html: legend.label }}
+        />
       ))}
     </div>
   );

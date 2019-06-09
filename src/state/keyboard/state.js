@@ -22,7 +22,7 @@ type KeyboardBackground = $ReadOnly<{|
   ----------------
   The string of the keycap is cut off at the last non-empty legend. For example, a keycap that is labeled 'Q' at the top left and '1' at the top right is encoded by the string "Q\n\n1".
 */
-type KeycapLegendAlignment =
+export type KeycapLegendAlignment =
   | 'top-left'
   | 'bottom-left'
   | 'top-right'
