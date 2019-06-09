@@ -5,6 +5,7 @@ import type {
   Keyboard,
   KeyboardState,
   Keycap,
+  KeycapAlignment,
   KeycapLegendAlignment,
   KeycapLegends,
   Keycaps,
@@ -26,15 +27,29 @@ const LEGEND_ALIGNMENTS: $ReadOnlyArray<KeycapLegendAlignment> = [
   'front-center',
 ];
 
+function extractAlignment(align: number): KeycapAlignment {
+  if (align === 6 || align === 2) {
+    return 'vertical-centered';
+  }
+  if (align === 7 || align === 3) {
+    return 'centered';
+  }
+  if (align === 5) {
+    return 'horizontal-centered';
+  }
+  if (align === 4) {
+    return 'front-centered';
+  }
+  return null;
+}
+
 function extractLegendsFromKey(key: string): KeycapLegends {
   const legends = key.split('\n');
   return legends
-    .map((legend, index) => {
-      return {
-        label: legend,
-        alignment: LEGEND_ALIGNMENTS[index],
-      };
-    })
+    .map((legend, index) => ({
+      label: legend,
+      alignment: LEGEND_ALIGNMENTS[index],
+    }))
     .filter(legend => Boolean(legend.label));
 }
 // Heavily inspired by: https://github.com/CQCumbers/kle_render/blob/master/keyboard.py#L93-L172
@@ -42,7 +57,7 @@ function extractKeycapsFromRows(
   rows: $ReadOnlyArray<Array<string | Object>>,
 ): Keycaps {
   const current = {
-    align: 0,
+    alignment: null,
     backgroundColor: '',
     color: '',
     fontSize2: 0,
@@ -83,7 +98,8 @@ function extractKeycapsFromRows(
         current.width2 = 0;
         current.height2 = 0;
       } else {
-        if (key.a) current.align = key.a;
+        // $FlowFixMe
+        if (key.a || key.a === 0) current.alignment = extractAlignment(key.a);
         if (key.f) current.fontSize = key.f;
         if (key.f2) current.fontSize2 = key.f2;
         if (key.p) current.profile = key.p;

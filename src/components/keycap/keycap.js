@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import Color from 'color';
+import classNames from 'classnames';
 
 import type { Keycap as Props } from 'state/keyboard/state.js';
 // import type { Node } from 'react';
@@ -19,6 +20,7 @@ function toFontSize(value: number): number {
 
 export default function Keycap(props: Props) {
   const {
+    alignment,
     color,
     fontSize,
     height,
@@ -34,6 +36,7 @@ export default function Keycap(props: Props) {
   } = props;
 
   const [marginTop, marginRight, marginBottom, marginLeft] = KEYCAP_MARGINS;
+  // eslint-disable-next-line react/destructuring-assignment
   const backgroundColor = props.backgroundColor || '#cccccc';
   const backgroundColorLight = Color(backgroundColor).lighten(0.25);
 
@@ -100,7 +103,12 @@ export default function Keycap(props: Props) {
         />
       ) : null}
       <div
-        className={styles.legends}
+        className={classNames(styles.legends, {
+          [styles.centered]: alignment === 'centered',
+          [styles['vertical-centered']]: alignment === 'vertical-centered',
+          [styles['horizontal-centered']]: alignment === 'horizontal-centered',
+          [styles['front-centered']]: alignment === 'front-centered',
+        })}
         style={{
           marginTop,
           marginRight,
@@ -108,19 +116,21 @@ export default function Keycap(props: Props) {
           marginLeft,
         }}
       >
-        {legends.map(legend => (
-          <span
-            key={legend.label}
-            className={styles[legend.alignment]}
-            dangerouslySetInnerHTML={{ __html: legend.label }}
-            style={{
-              color: color || '#000000',
-              fontSize: legend.alignment.startsWith('front-')
-                ? 10
-                : toFontSize(fontSize || 3),
-            }}
-          />
-        ))}
+        {legends.map(legend => {
+          return (
+            <span
+              key={legend.label}
+              className={styles[legend.alignment]}
+              dangerouslySetInnerHTML={{ __html: legend.label }}
+              style={{
+                color: color || '#000000',
+                fontSize: legend.alignment.startsWith('front-')
+                  ? 10
+                  : toFontSize(fontSize || 3),
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );

@@ -43,8 +43,15 @@ export type KeycapLegend = $ReadOnly<{|
 
 export type KeycapLegends = $ReadOnlyArray<KeycapLegend>;
 
+export type KeycapAlignment =
+  | 'centered'
+  | 'vertical-centered'
+  | 'horizontal-centered'
+  | 'front-centered'
+  | null;
+
 export type Keycap = $ReadOnly<{|
-  align?: number,
+  alignment: KeycapAlignment,
   backgroundColor: string,
   color: string,
   fontSize2: number,
@@ -69,6 +76,7 @@ export type Keycap = $ReadOnly<{|
 
 export function createKeycap(additions?: $Shape<Keycap>): Keycap {
   const required = {
+    alignment: null,
     backgroundColor: '',
     color: '',
     fontSize2: 0,
