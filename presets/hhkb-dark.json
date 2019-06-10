@@ -1,0 +1,164 @@
+[
+  {
+    "backcolor": "#333333",
+    "name": "HHKB Professional 2 (dark)"
+  },
+  [
+    {
+      "c": "#444444",
+      "p": "R1",
+      "a": 2
+    },
+    "Esc\n\n\n\nPower",
+    {
+      "a": 0,
+      "f": 4
+    },
+    "!\n1\n\n\nF1",
+    "@\n2\n\n\nF2",
+    "#\n3\n\n\nF3",
+    "$\n4\n\n\nF4",
+    "%\n5\n\n\nF5",
+    "^\n6\n\n\nF6",
+    "&\n7\n\n\nF7",
+    "*\n8\n\n\nF8",
+    "(\n9\n\n\nF9",
+    ")\n0\n\n\nF10",
+    "_\n-\n\n\nF11",
+    "+\n=\n\n\nF12",
+    "|\n\\\n\n\nIns",
+    "~\n`\n\n\nDel"
+  ],
+  [
+    {
+      "p": "R2",
+      "a": 6,
+      "f": 3,
+      "w": 1.5
+    },
+    "Tab\n\n\n\nCaps",
+    {
+      "a": 4,
+      "f": 4
+    },
+    "Q",
+    "W",
+    "E",
+    "R",
+    "T",
+    "Y",
+    "U",
+    "I\n\n\n\nPrtScr",
+    "O\n\n\n\nScrLck",
+    "P\n\n\n\nPusBr",
+    {
+      "a": 0
+    },
+    "{\n[\n\n\n↑",
+    {
+      "a": 4
+    },
+    "}\n]",
+    {
+      "a": 2,
+      "f": 3,
+      "w": 1.5
+    },
+    "Delete\n\n\n\nBS\nClear"
+  ],
+  [
+    {
+      "p": "R3",
+      "a": 6,
+      "w": 1.75
+    },
+    "Control",
+    {
+      "a": 4,
+      "f": 4
+    },
+    "A\n\n\n\nVol_Dn",
+    "S\n\n\n\nVol_Up",
+    "D\n\n\n\nMute",
+    "F\n\n\n\nEject",
+    "G",
+    "H\n\n\n\n*",
+    "J\n\n\n\n/",
+    "K\n\n\n\nHome",
+    "L\n\n\n\nPgUp",
+    {
+      "a": 0
+    },
+    ":\n;\n\n\n←",
+    "\"\n'\n\n\n→",
+    {
+      "a": 2,
+      "f": 3,
+      "w": 2.25
+    },
+    "Return\n\n\n\n\nEnter"
+  ],
+  [
+    {
+      "p": "R4",
+      "a": 6,
+      "w": 2.25
+    },
+    "Shift",
+    {
+      "a": 4,
+      "f": 4
+    },
+    "Z",
+    "X",
+    "C",
+    "V",
+    "B",
+    "N\n\n\n\n+",
+    {
+      "sb": "hua-jie"
+    },
+    "M\n\n\n\n-",
+    "<\n,\n\n\nEnd",
+    ">\n.\n\n\nPgDn",
+    {
+      "a": 0
+    },
+    "?\n/\n\n\n↓",
+    {
+      "a": 6,
+      "f": 3,
+      "w": 1.75
+    },
+    "Shift",
+    "Fn"
+  ],
+  [
+    {
+      "x": 1.5,
+      "p": "SPACE",
+      "a": 4
+    },
+    "\n\nOpt\n\n\n\nAlt",
+    {
+      "f": 4,
+      "w": 1.5
+    },
+    "\n\n⌘\n\n\n\n♢",
+    {
+      "a": 7,
+      "w": 6
+    },
+    "",
+    {
+      "a": 0,
+      "w": 1.5
+    },
+    "\n\n⌘\n\nStop\n\n♢",
+    {
+      "a": 4,
+      "f": 3
+    },
+    "\n\nOpt\n\n\n\nAlt"
+  ]
+]
