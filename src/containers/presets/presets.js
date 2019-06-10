@@ -52,6 +52,7 @@ function Presets(props: Props): Node {
       <label htmlFor="selectPreset">
         Or select preset:{' '}
         <select id="selectPreset" onChange={handleChange}>
+          <option>---</option>
           {presets.map((preset, index) => (
             <option key={preset.name} value={index}>
               {preset.name}
