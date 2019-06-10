@@ -127,6 +127,17 @@ function extractKeycapsFromRows(rows: Rows): Keycaps {
         }
         if (key.l) current.stepped = key.l;
         if (key.n) current.homing = key.n;
+        if (key.r) current.rotationAngle = key.r;
+        if (key.rx) {
+          current.rotationX = key.rx;
+          current.x = 0;
+          current.y = 0;
+        }
+        if (key.ry) {
+          current.rotationY = key.ry;
+          current.x = 0;
+          current.y = 0;
+        }
       }
     });
     current.x = 0;

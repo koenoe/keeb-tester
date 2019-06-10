@@ -33,6 +33,7 @@ export default function Keycap(props: Props) {
     x2,
     y,
     y2,
+    rotationAngle,
   } = props;
 
   const [marginTop, marginRight, marginBottom, marginLeft] = KEYCAP_MARGINS;
@@ -48,6 +49,7 @@ export default function Keycap(props: Props) {
         left: toPixels(x),
         top: toPixels(y),
         width: toPixels(width),
+        transform: `rotate(${rotationAngle || 0}deg)`,
       }}
     >
       <div
