@@ -12,9 +12,8 @@ import rootSaga from './rootSaga.js';
 import { initialState } from './state.js';
 import createReducer from './reducers.js';
 
-import type { State } from './state.js';
+import type { State, Action } from './state.js';
 
-type Action = { type: string };
 export type Store = ReduxStore<State, Action>;
 
 const sagaMiddleware = createSagaMiddleware<*>({
