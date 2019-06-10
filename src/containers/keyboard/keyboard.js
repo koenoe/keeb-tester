@@ -6,6 +6,7 @@ import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
 import Keycap from 'components/keycap/keycap.js';
 
+import type { Node } from 'react';
 import type { State } from 'state/state.js';
 import type { Keyboard as KeyboardState } from 'state/keyboard/state.js';
 
@@ -25,7 +26,7 @@ const mapStateToProps: OutputSelector<
   keyboard: keyboardSelectors.activeKeyboard,
 });
 
-function Keyboard(props: Props) {
+function Keyboard(props: Props): Node {
   const { keyboard } = props;
 
   if (!keyboard) {

@@ -10,6 +10,7 @@ import Card from 'components/card/card.js';
 
 import isDebugMode from 'utils/debug.js';
 
+import type { Node } from 'react';
 import type { State } from 'state/state.js';
 import type { KeyboardState } from 'state/keyboard/state.js';
 
@@ -74,7 +75,7 @@ function useFileReader(): $ReadOnly<{|
   };
 }
 
-function Upload(props: Props) {
+function Upload(props: Props): Node {
   const { error, value, handleChange } = useFileReader();
   const { updateKeyboard } = props;
 

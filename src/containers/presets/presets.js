@@ -8,6 +8,7 @@ import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
 import Card from 'components/card/card.js';
 
+import type { Node } from 'react';
 import type { State } from 'state/state.js';
 import type { KeyboardPresets, Keyboard } from 'state/keyboard/state.js';
 
@@ -36,7 +37,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-function Presets(props: Props) {
+function Presets(props: Props): Node {
   const { presets, updateKeyboard } = props;
 
   const handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
