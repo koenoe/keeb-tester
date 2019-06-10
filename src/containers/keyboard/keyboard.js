@@ -32,12 +32,25 @@ function Keyboard(props: Props) {
     return null;
   }
 
-  const { keycaps, width, height, backgroundColor, borderRadius } = keyboard;
+  const {
+    backgroundColor,
+    backgroundImage,
+    borderRadius,
+    height,
+    keycaps,
+    width,
+  } = keyboard;
 
   return (
     <div
       className={styles.keyboard}
-      style={{ width, height, backgroundColor, borderRadius }}
+      style={{
+        backgroundColor,
+        backgroundImage: backgroundImage ? `url(${backgroundImage})` : null,
+        borderRadius,
+        height,
+        width,
+      }}
     >
       <div className={styles.keycaps}>
         {keycaps.map((keycap, index) => (

@@ -3,6 +3,7 @@ import * as actions from './actions.js';
 import {
   initialState as initialKeyboardState,
   createKeycap,
+  createKeyboard,
   KEYCAP_SIZE,
 } from './state.js';
 import type {
@@ -13,10 +14,9 @@ import type {
   KeycapLegendAlignment,
   KeycapLegends,
   Keycaps,
+  PayloadRows,
 } from './state.js';
 import type { Action } from './actions.js';
-
-type Rows = $ReadOnlyArray<Array<string | Object>>;
 
 const LEGEND_ALIGNMENTS: $ReadOnlyArray<KeycapLegendAlignment> = [
   'top-left',
@@ -60,7 +60,7 @@ function extractLegendsFromKey(key: string): KeycapLegends {
 }
 
 // Heavily inspired by: https://github.com/CQCumbers/kle_render/blob/master/keyboard.py#L93-L172
-function extractKeycapsFromRows(rows: Rows): Keycaps {
+function extractKeycapsFromRows(rows: PayloadRows): Keycaps {
   const current = {
     alignment: null,
     backgroundColor: '',
@@ -154,7 +154,7 @@ function extractKeyboardHeightFromLastKeycap(keycap: Keycap): number {
 
 // Bit hacky, but will do for now.
 // Row with most keycaps doesn't necessary need to be the longest row.
-function extractKeyboardWidthFromRows(rows: Rows): number {
+function extractKeyboardWidthFromRows(rows: PayloadRows): number {
   const longestRow = rows.reduce((a, b) => {
     return a.length > b.length ? a : b;
   });
@@ -172,22 +172,33 @@ function extractKeyboardWidthFromRows(rows: Rows): number {
   return totalWidth * KEYCAP_SIZE;
 }
 
-function extractKeyboardFromJson(rawJson: string): Keyboard {
-  const json = JSON.parse(rawJson);
+function extractKeyboardFromJson(rawJson: string | PayloadRows): Keyboard {
+  const json = typeof rawJson === 'string' ? JSON.parse(rawJson) : [...rawJson];
   const rows = json.filter(row => row instanceof Array);
-  const firstRow = json.shift();
   const keycaps: Keycaps = extractKeycapsFromRows(rows);
+  const firstRow = [...json].shift();
 
-  return {
+  const backgroundImage =
+    firstRow.background && firstRow.background.style
+      ? String(firstRow.background.style)
+          .replace("background-image: url('", '')
+          .replace("');", '')
+      : null;
+
+  // $FlowFixMe
+  return createKeyboard({
     keycaps,
-    ...(firstRow.author && { author: firstRow.author }),
-    ...(firstRow.background && { background: firstRow.background }),
-    backgroundColor: firstRow.backcolor || '#eeeeee',
-    borderRadius: firstRow.radii || '6px',
-    ...(firstRow.name && { name: firstRow.name }),
+    ...(firstRow.author && { author: String(firstRow.author) }),
+    ...(backgroundImage && {
+      backgroundImage: `http://www.keyboard-layout-editor.com${backgroundImage}`,
+    }),
+    ...(firstRow.backcolor && { backgroundColor: String(firstRow.backcolor) }),
+    ...(firstRow.radii && { borderRadius: String(firstRow.radii) }),
+    // $FlowFixMe
+    ...(firstRow.name && { name: String(firstRow.name) }),
     height: extractKeyboardHeightFromLastKeycap(keycaps[keycaps.length - 1]),
     width: extractKeyboardWidthFromRows(rows),
-  };
+  });
 }
 
 export default function keyboardReducer(
@@ -205,6 +216,13 @@ export default function keyboardReducer(
       return {
         ...state,
         active: keyboard,
+      };
+    }
+
+    case actions.LOAD_PRESETS_SUCCESS: {
+      return {
+        ...state,
+        presets: action.presets.map(preset => extractKeyboardFromJson(preset)),
       };
     }
 

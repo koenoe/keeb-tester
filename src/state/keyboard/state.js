@@ -1,9 +1,4 @@
 // @flow
-type KeyboardBackground = $ReadOnly<{|
-  name: string,
-  style: string,
-|}>;
-
 /*
   If a keycap has multiple legends, each legend is separated by a newline character \n. The order of legend positions is as follows:
   ---------------
@@ -99,9 +94,10 @@ export function createKeycap(additions?: $Shape<Keycap>): Keycap {
 }
 
 export type Keycaps = $ReadOnlyArray<Keycap>;
+
 export type Keyboard = $ReadOnly<{|
   author?: string,
-  background?: KeyboardBackground,
+  backgroundImage?: string,
   backgroundColor: string,
   borderRadius: string,
   keycaps: Keycaps,
@@ -110,10 +106,27 @@ export type Keyboard = $ReadOnly<{|
   width: number,
 |}>;
 
+export function createKeyboard(additions?: $Shape<Keyboard>): Keyboard {
+  const required = {
+    backgroundColor: '#eeeeee',
+    borderRadius: '6px',
+    keycaps: [],
+    height: 0,
+    width: 0,
+  };
+
+  return {
+    ...required,
+    ...(additions !== undefined ? additions : {}),
+  };
+}
+
 export type KeyboardState = $ReadOnly<{|
   active: ?Keyboard,
   presets: $ReadOnlyArray<Keyboard>,
 |}>;
+
+export type PayloadRows = $ReadOnlyArray<Array<string | Object>>;
 
 export const initialState: KeyboardState = {
   active: null,
