@@ -58,12 +58,9 @@ export default function configureStore(): Store {
 
   // $FlowFixMe
   if (module.hot) {
-    module.hot.accept(
-      'state/reducers.js',
-      (): void => {
-        store.replaceReducer(createReducer());
-      },
-    );
+    module.hot.accept('state/reducers.js', (): void => {
+      store.replaceReducer(createReducer());
+    });
   }
 
   return store;
