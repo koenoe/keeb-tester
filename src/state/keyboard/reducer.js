@@ -183,7 +183,7 @@ function extractKeyboardFromJson(rawJson: string): Keyboard {
     ...(firstRow.author && { author: firstRow.author }),
     ...(firstRow.background && { background: firstRow.background }),
     backgroundColor: firstRow.backcolor || '#eeeeee',
-    borderRadius: firstRow.radii || 6,
+    borderRadius: firstRow.radii || '6px',
     ...(firstRow.name && { name: firstRow.name }),
     height: extractKeyboardHeightFromLastKeycap(keycaps[keycaps.length - 1]),
     width: extractKeyboardWidthFromRows(rows),
