@@ -6,6 +6,7 @@ import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
 import Keycap from 'components/keycap/keycap.js';
 
+import type { Node } from 'react';
 import type { State } from 'state/state.js';
 import type { Keyboard as KeyboardState } from 'state/keyboard/state.js';
 
@@ -25,19 +26,32 @@ const mapStateToProps: OutputSelector<
   keyboard: keyboardSelectors.activeKeyboard,
 });
 
-function Keyboard(props: Props) {
+function Keyboard(props: Props): Node {
   const { keyboard } = props;
 
   if (!keyboard) {
     return null;
   }
 
-  const { keycaps, width, height, backgroundColor, borderRadius } = keyboard;
+  const {
+    backgroundColor,
+    backgroundImage,
+    borderRadius,
+    height,
+    keycaps,
+    width,
+  } = keyboard;
 
   return (
     <div
       className={styles.keyboard}
-      style={{ width, height, backgroundColor, borderRadius }}
+      style={{
+        backgroundColor,
+        backgroundImage: backgroundImage ? `url(${backgroundImage})` : null,
+        borderRadius,
+        height,
+        width,
+      }}
     >
       <div className={styles.keycaps}>
         {keycaps.map((keycap, index) => (

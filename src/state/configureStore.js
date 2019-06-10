@@ -12,9 +12,8 @@ import rootSaga from './rootSaga.js';
 import { initialState } from './state.js';
 import createReducer from './reducers.js';
 
-import type { State } from './state.js';
+import type { State, Action } from './state.js';
 
-type Action = { type: string };
 export type Store = ReduxStore<State, Action>;
 
 const sagaMiddleware = createSagaMiddleware<*>({
@@ -24,7 +23,7 @@ const sagaMiddleware = createSagaMiddleware<*>({
   },
 });
 
-const sagaFailMiddleware = () => next => action => {
+const sagaFailMiddleware = () => next => (action: Action) => {
   try {
     return next(action);
   } catch (e) {
@@ -58,12 +57,9 @@ export default function configureStore(): Store {
 
   // $FlowFixMe
   if (module.hot) {
-    module.hot.accept(
-      'state/reducers.js',
-      (): void => {
-        store.replaceReducer(createReducer());
-      },
-    );
+    module.hot.accept('state/reducers.js', (): void => {
+      store.replaceReducer(createReducer());
+    });
   }
 
   return store;

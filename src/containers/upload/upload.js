@@ -2,15 +2,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector, type OutputSelector } from 'reselect';
+
 import * as keyboardActions from 'state/keyboard/actions.js';
 import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
+import Card from 'components/card/card.js';
+
 import isDebugMode from 'utils/debug.js';
 
+import type { Node } from 'react';
 import type { State } from 'state/state.js';
 import type { KeyboardState } from 'state/keyboard/state.js';
-
-import styles from './upload.css';
 
 type OutProps = {|
   keyboard: KeyboardState,
@@ -73,7 +75,7 @@ function useFileReader(): $ReadOnly<{|
   };
 }
 
-function Upload(props: Props) {
+function Upload(props: Props): Node {
   const { error, value, handleChange } = useFileReader();
   const { updateKeyboard } = props;
 
@@ -82,11 +84,11 @@ function Upload(props: Props) {
   }, [value, updateKeyboard]);
 
   return (
-    <div className={styles.container}>
+    <Card>
       <input type="file" accept=".json" onChange={handleChange} />
       {error && <p>{error.toString()}</p>}
       {isDebugMode() && value && <pre>{value}</pre>}
-    </div>
+    </Card>
   );
 }
 

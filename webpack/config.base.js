@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
+const resolveRelative = file => path.resolve(__dirname, file);
 
 module.exports = options => ({
   mode: options.mode,
@@ -87,6 +90,9 @@ module.exports = options => ({
     ]),
   },
   plugins: options.plugins.concat([
+    new CopyPlugin([
+      resolveRelative('../presets/*.json'),
+    ]),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
