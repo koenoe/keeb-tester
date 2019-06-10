@@ -135,14 +135,14 @@ function extractKeycapsFromRows(rows: Rows): Keycaps {
   return keycaps;
 }
 
-function filterKeyboardRows(rows: Rows): $ReadOnlyArray<Array<string>> {
-  return rows.map(row => row.filter(key => typeof key === 'string'));
+// Bit hacky, but will do for now.
+// Last keycap could have a lower Y value in case of an Ergonomic keyboard
+function extractKeyboardHeightFromLastKeycap(keycap: Keycap): number {
+  return (keycap.height + keycap.y) * KEYCAP_SIZE;
 }
 
-function extractKeyboardHeightFromRows(rows: Rows): number {
-  return filterKeyboardRows(rows).length * KEYCAP_SIZE;
-}
-
+// Bit hacky, but will do for now.
+// Row with most keycaps doesn't necessary need to be the longest row.
 function extractKeyboardWidthFromRows(rows: Rows): number {
   const longestRow = rows.reduce((a, b) => {
     return a.length > b.length ? a : b;
@@ -174,7 +174,7 @@ function extractKeyboardFromJson(rawJson: string): Keyboard {
     backgroundColor: firstRow.backcolor || '#eeeeee',
     borderRadius: firstRow.radii || 6,
     ...(firstRow.name && { name: firstRow.name }),
-    height: extractKeyboardHeightFromRows(rows),
+    height: extractKeyboardHeightFromLastKeycap(keycaps[keycaps.length - 1]),
     width: extractKeyboardWidthFromRows(rows),
   };
 }
