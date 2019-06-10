@@ -1,6 +1,10 @@
 [
   {
     "backcolor": "#333333",
+    "background": {
+      "name": "HHKB Professional 2 (dark)",
+      "style": "background-image: url('./img/hhkb-pro-dark.png');"
+    },
     "name": "HHKB Professional 2 (dark)"
   },
   [

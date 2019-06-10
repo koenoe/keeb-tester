@@ -92,6 +92,7 @@ module.exports = options => ({
   plugins: options.plugins.concat([
     new CopyPlugin([
       resolveRelative('../presets/*.json'),
+      resolveRelative('../img/*.{png,svg,jpg,webp}'),
     ]),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output

@@ -190,7 +190,9 @@ function extractKeyboardFromJson(rawJson: string | PayloadRows): Keyboard {
     keycaps,
     ...(firstRow.author && { author: String(firstRow.author) }),
     ...(backgroundImage && {
-      backgroundImage: `http://www.keyboard-layout-editor.com${backgroundImage}`,
+      backgroundImage: backgroundImage.startsWith('./')
+        ? backgroundImage
+        : `http://www.keyboard-layout-editor.com${backgroundImage}`,
     }),
     ...(firstRow.backcolor && { backgroundColor: String(firstRow.backcolor) }),
     ...(firstRow.radii && { borderRadius: String(firstRow.radii) }),
