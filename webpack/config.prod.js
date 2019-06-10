@@ -96,6 +96,7 @@ module.exports = require('./config.base.js')({
 
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
+      DEBUG_MODE: false,
     }),
   ],
 

@@ -5,10 +5,12 @@ import { createStructuredSelector, type OutputSelector } from 'reselect';
 import * as keyboardActions from 'state/keyboard/actions.js';
 import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
+import isDebugMode from 'utils/debug.js';
+
 import type { State } from 'state/state.js';
 import type { KeyboardState } from 'state/keyboard/state.js';
 
-import styles from './keyboardLayoutEditorInput.css';
+import styles from './upload.css';
 
 type OutProps = {|
   keyboard: KeyboardState,
@@ -71,7 +73,7 @@ function useFileReader(): $ReadOnly<{|
   };
 }
 
-function KeyboardLayoutEditorInput(props: Props) {
+function Upload(props: Props) {
   const { error, value, handleChange } = useFileReader();
   const { updateKeyboard } = props;
 
@@ -83,7 +85,7 @@ function KeyboardLayoutEditorInput(props: Props) {
     <div className={styles.container}>
       <input type="file" accept=".json" onChange={handleChange} />
       {error && <p>{error.toString()}</p>}
-      {value && <pre>{value}</pre>}
+      {isDebugMode() && value && <pre>{value}</pre>}
     </div>
   );
 }
@@ -91,4 +93,4 @@ function KeyboardLayoutEditorInput(props: Props) {
 export default connect<Props, {||}, _, _, _, _>(
   mapStateToProps,
   mapDispatchToProps,
-)(KeyboardLayoutEditorInput);
+)(Upload);

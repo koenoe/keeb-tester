@@ -29,6 +29,9 @@
 .legends span {
   position: absolute;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+.legends span[class*="front-"] {
   white-space: nowrap;
 }
 

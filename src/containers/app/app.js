@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
 
-import KeyboardLayoutEditorInput from 'containers/keyboardLayoutEditorInput/keyboardLayoutEditorInput.js';
+import Upload from 'containers/upload/upload.js';
 import Keyboard from 'containers/keyboard/keyboard.js';
 
 export default function App() {
   return (
     <>
-      <KeyboardLayoutEditorInput />
+      <Upload />
       <Keyboard />
     </>
   );
