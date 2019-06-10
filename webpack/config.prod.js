@@ -17,6 +17,7 @@ module.exports = require('./config.base.js')({
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
+    publicPath: './',
   },
 
   optimization: {
