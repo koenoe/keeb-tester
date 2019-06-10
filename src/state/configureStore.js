@@ -23,7 +23,7 @@ const sagaMiddleware = createSagaMiddleware<*>({
   },
 });
 
-const sagaFailMiddleware = () => next => action => {
+const sagaFailMiddleware = () => next => (action: Action) => {
   try {
     return next(action);
   } catch (e) {
