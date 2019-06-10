@@ -6,10 +6,10 @@ import { createStructuredSelector, type OutputSelector } from 'reselect';
 import * as keyboardActions from 'state/keyboard/actions.js';
 import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
+import Card from 'components/card/card.js';
+
 import type { State } from 'state/state.js';
 import type { KeyboardPresets, Keyboard } from 'state/keyboard/state.js';
-
-import styles from './presets.css';
 
 type OutProps = {|
   presets: KeyboardPresets,
@@ -46,19 +46,19 @@ function Presets(props: Props) {
   };
 
   return (
-    <div className={styles.container}>
-      <select onChange={handleChange}>
-        {presets.map((preset, index) => (
-          <option
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
-            value={index}
-          >
-            {index}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Card>
+      {/* eslint-disable-next-line jsx-a11y/label-has-for */}
+      <label htmlFor="selectPreset">
+        Or select preset:{' '}
+        <select id="selectPreset" onChange={handleChange}>
+          {presets.map((preset, index) => (
+            <option key={preset.name} value={index}>
+              {preset.name}
+            </option>
+          ))}
+        </select>
+      </label>
+    </Card>
   );
 }
 

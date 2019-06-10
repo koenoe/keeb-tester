@@ -97,12 +97,12 @@ export type Keycaps = $ReadOnlyArray<Keycap>;
 
 export type Keyboard = $ReadOnly<{|
   author?: string,
-  backgroundImage?: string,
   backgroundColor: string,
+  backgroundImage?: string,
   borderRadius: string,
-  keycaps: Keycaps,
-  name?: string,
   height: number,
+  keycaps: Keycaps,
+  name: string,
   width: number,
 |}>;
 
@@ -110,8 +110,9 @@ export function createKeyboard(additions?: $Shape<Keyboard>): Keyboard {
   const required = {
     backgroundColor: '#eeeeee',
     borderRadius: '6px',
-    keycaps: [],
     height: 0,
+    keycaps: [],
+    name: '',
     width: 0,
   };
 
