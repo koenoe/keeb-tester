@@ -94,7 +94,6 @@ export function createKeycap(additions?: $Shape<Keycap>): Keycap {
 }
 
 export type Keycaps = $ReadOnlyArray<Keycap>;
-
 export type Keyboard = $ReadOnly<{|
   author?: string,
   backgroundColor: string,
