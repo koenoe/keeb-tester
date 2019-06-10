@@ -6,8 +6,11 @@ import type { Saga } from 'redux-saga';
 
 const LOCAL_PRESETS = [
   './presets/ansi-104.json',
-  './presets/iso-105.json',
+  './presets/hhkb-dark.json',
   './presets/hhkb-light.json',
+  './presets/iso-105.json',
+  './presets/mech27.json',
+  './presets/triangle.json',
 ];
 
 export function* loadPresets(): Saga<void> {

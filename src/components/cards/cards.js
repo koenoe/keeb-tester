@@ -3,13 +3,13 @@ import React from 'react';
 
 import type { Node } from 'react';
 
-import styles from './card.css';
+import styles from './cards.css';
 
 type Props = $ReadOnly<{|
   children: Node,
 |}>;
 
-export default function Card(props: Props) {
+export default function Cards(props: Props) {
   const { children } = props;
 
   return <div className={styles.container}>{children}</div>;
