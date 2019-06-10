@@ -1,5 +1,5 @@
 // @flow
-import type { PayloadRows } from './state.js';
+import type { PayloadRows, Keyboard } from './state.js';
 
 export const SET_KEYBOARD = 'keyboard/SET_KEYBOARD';
 export const SET_KEYBOARD_FROM_JSON = 'keyboard/SET_KEYBOARD_FROM_JSON';
@@ -19,6 +19,18 @@ export function setKeyboardFromJson(
   return {
     type: SET_KEYBOARD_FROM_JSON,
     rawJson,
+  };
+}
+
+export type SetKeyboardAction = {|
+  type: 'keyboard/SET_KEYBOARD',
+  keyboard: Keyboard,
+|};
+
+export function setKeyboard(keyboard: Keyboard): SetKeyboardAction {
+  return {
+    type: SET_KEYBOARD,
+    keyboard,
   };
 }
 
@@ -69,6 +81,7 @@ export function loadPresetsSuccess(
 }
 
 export type Action =
+  | SetKeyboardAction
   | SetKeyboardFromJsonAction
   | ResetKeyboardAction
   | LoadPresetsAction

@@ -210,6 +210,13 @@ export default function keyboardReducer(
   }
 
   switch (action.type) {
+    case actions.SET_KEYBOARD: {
+      return {
+        ...state,
+        active: action.keyboard,
+      };
+    }
+
     case actions.SET_KEYBOARD_FROM_JSON: {
       const keyboard: Keyboard = extractKeyboardFromJson(action.rawJson);
 

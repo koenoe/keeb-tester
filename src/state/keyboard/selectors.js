@@ -1,7 +1,13 @@
 // @flow
 import { createSelector, type OutputSelector } from 'reselect';
+
 import type { State } from 'state/state.js';
-import type { KeyboardState, Keycaps, Keyboard } from './state.js';
+import type {
+  Keyboard,
+  KeyboardPresets,
+  KeyboardState,
+  Keycaps,
+} from './state.js';
 
 export const keyboardState: State => KeyboardState = state => state.keyboard;
 
@@ -21,6 +27,15 @@ export const activeKeyboardKeycaps: OutputSelector<
 > = createSelector(
   [activeKeyboard],
   keyboard => (keyboard ? keyboard.keycaps : []),
+);
+
+export const presets: OutputSelector<
+  State,
+  any,
+  KeyboardPresets,
+> = createSelector(
+  [keyboardState],
+  state => state.presets,
 );
 
 // export const keycaps: OutputSelector<State, any, Keycaps> = createSelector(

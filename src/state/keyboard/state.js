@@ -120,10 +120,10 @@ export function createKeyboard(additions?: $Shape<Keyboard>): Keyboard {
     ...(additions !== undefined ? additions : {}),
   };
 }
-
+export type KeyboardPresets = $ReadOnlyArray<Keyboard>;
 export type KeyboardState = $ReadOnly<{|
   active: ?Keyboard,
-  presets: $ReadOnlyArray<Keyboard>,
+  presets: KeyboardPresets,
 |}>;
 
 export type PayloadRows = $ReadOnlyArray<Array<string | Object>>;
