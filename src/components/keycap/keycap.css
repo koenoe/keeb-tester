@@ -20,6 +20,7 @@
 
 .keycap {
   border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .border {
@@ -118,19 +119,19 @@
 
 .front-left {
   left: 3px;
-  bottom: -9px;
+  bottom: -10px;
 }
 
 .front-center {
   width: 100%;
   display: flex;
   justify-content: center;
-  bottom: -9px;
+  bottom: -10px;
 }
 
 .front-right {
   right: 3px;
-  bottom: -9px;
+  bottom: -10px;
 }
 
 .bottom-left {
