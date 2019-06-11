@@ -1,5 +1,9 @@
 [
   {
+    "background": {
+      "name": "HHKB Professional 2 (light)",
+      "style": "background-image: url('./img/hhkb-pro-light.png');"
+    },
     "name": "HHKB Professional 2 (light)"
   },
   [
