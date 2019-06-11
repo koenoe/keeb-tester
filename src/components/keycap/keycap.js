@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import Color from 'color';
+import chroma from 'chroma-js';
 import classNames from 'classnames';
 import { KEYCAP_SIZE } from 'state/keyboard/state.js';
 
@@ -39,7 +39,7 @@ export default function Keycap(props: Props) {
   const [marginTop, marginRight, marginBottom, marginLeft] = KEYCAP_MARGINS;
   // eslint-disable-next-line react/destructuring-assignment
   const backgroundColor = props.backgroundColor || '#cccccc';
-  const backgroundColorLight = Color(backgroundColor).lighten(0.25);
+  const backgroundColorLight = chroma(backgroundColor).brighten();
 
   return (
     <div
