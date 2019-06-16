@@ -40,6 +40,7 @@ export default function Keycap(props: Props) {
   // eslint-disable-next-line react/destructuring-assignment
   const backgroundColor = props.backgroundColor || '#cccccc';
   const backgroundColorLight = chroma(backgroundColor).brighten();
+  const keycapInlineBorderColor = chroma(backgroundColor).darken(0.4);
 
   return (
     <div
@@ -86,6 +87,7 @@ export default function Keycap(props: Props) {
         className={styles.keycap}
         style={{
           backgroundColor: backgroundColorLight,
+          borderColor: keycapInlineBorderColor,
           marginTop,
           marginRight,
           marginBottom,
@@ -93,16 +95,31 @@ export default function Keycap(props: Props) {
         }}
       />
       {width2 && height2 && !stepped ? (
-        <div
-          className={styles.keycap}
-          style={{
-            backgroundColor: backgroundColorLight,
-            height: toPixels(height2) - marginTop - marginBottom,
-            left: toPixels(x2 || 0) + marginLeft,
-            top: toPixels(y2 || 0) + marginTop,
-            width: toPixels(width2) - marginLeft - marginRight,
-          }}
-        />
+        <>
+          <div
+            className={styles.keycap}
+            style={{
+              backgroundColor: backgroundColorLight,
+              borderColor: keycapInlineBorderColor,
+              height: toPixels(height2) - marginTop - marginBottom,
+              left: toPixels(x2 || 0) + marginLeft,
+              top: toPixels(y2 || 0) + marginTop,
+              width: toPixels(width2) - marginLeft - marginRight,
+            }}
+          />
+          {/* This is necessary for a proper inline border of odd shaped keys like ISO Enter */}
+          <div
+            className={styles.keycap}
+            style={{
+              backgroundColor: backgroundColorLight,
+              marginTop: marginTop + 1,
+              marginRight: marginRight + 1,
+              marginBottom: marginBottom + 1,
+              marginLeft: marginLeft + 1,
+              border: 0,
+            }}
+          />
+        </>
       ) : null}
       <div
         className={classNames(styles.legends, {
