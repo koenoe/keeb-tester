@@ -81,6 +81,7 @@ function Keyboard(props: Props): Node {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const previousKeyboard = useRef<KeyboardState>(keyboard);
+
   if (previousKeyboard.current && previousKeyboard.current !== keyboard) {
     dispatch({ type: 'reset' });
     previousKeyboard.current = keyboard;
