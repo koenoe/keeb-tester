@@ -4,9 +4,16 @@ import chroma from 'chroma-js';
 import classNames from 'classnames';
 import { KEYCAP_SIZE } from 'state/keyboard/state.js';
 
-import type { Keycap as Props } from 'state/keyboard/state.js';
+import type { Keycap as KeycapState } from 'state/keyboard/state.js';
 
 import styles from './keycap.css';
+
+type Props = $ReadOnly<{|
+  isActive: boolean,
+  isPressed: boolean,
+|}>;
+
+type CombinedProps = $ReadOnly<{| ...KeycapState, ...Props |}>;
 
 const KEYCAP_MARGINS = [3, 6, 10, 6];
 
@@ -18,14 +25,17 @@ function toFontSize(value: number): number {
   return 6 + 2 * value;
 }
 
-export default function Keycap(props: Props) {
+export default function Keycap(props: CombinedProps) {
   const {
     alignment,
     color,
     fontSize,
     height,
     height2,
+    isActive,
+    isPressed,
     legends,
+    rotationAngle,
     stepped,
     width,
     width2,
@@ -33,12 +43,17 @@ export default function Keycap(props: Props) {
     x2,
     y,
     y2,
-    rotationAngle,
   } = props;
 
   const [marginTop, marginRight, marginBottom, marginLeft] = KEYCAP_MARGINS;
-  // eslint-disable-next-line react/destructuring-assignment
-  const backgroundColor = props.backgroundColor || '#cccccc';
+  const activeBackgroundColor = isActive ? '#09801a' : null;
+  const pressedBackgroundColor = isPressed ? '#92ed96' : null;
+  const backgroundColor =
+    activeBackgroundColor ||
+    pressedBackgroundColor ||
+    // eslint-disable-next-line react/destructuring-assignment
+    props.backgroundColor ||
+    '#cccccc';
   const backgroundColorLight = chroma(backgroundColor).brighten();
   const keycapInlineBorderColor = chroma(backgroundColor).darken(0.4);
 
