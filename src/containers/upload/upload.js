@@ -6,8 +6,6 @@ import { createStructuredSelector, type OutputSelector } from 'reselect';
 import * as keyboardActions from 'state/keyboard/actions.js';
 import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
-import Card from 'components/card/card.js';
-
 import isDebugMode from 'utils/debug.js';
 
 import type { Node } from 'react';
@@ -84,11 +82,12 @@ function Upload(props: Props): Node {
   }, [value, updateKeyboard]);
 
   return (
-    <Card>
-      <input type="file" accept=".json" onChange={handleChange} />
+    <label htmlFor="upload">
+      upload KLE layout:{' '}
+      <input id="layout" type="file" accept=".json" onChange={handleChange} />
       {error && <p>{error.toString()}</p>}
       {isDebugMode() && value && <pre>{value}</pre>}
-    </Card>
+    </label>
   );
 }
 
