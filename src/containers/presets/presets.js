@@ -6,8 +6,6 @@ import { createStructuredSelector, type OutputSelector } from 'reselect';
 import * as keyboardActions from 'state/keyboard/actions.js';
 import * as keyboardSelectors from 'state/keyboard/selectors.js';
 
-import Card from 'components/card/card.js';
-
 import type { Node } from 'react';
 import type { State } from 'state/state.js';
 import type { KeyboardPresets, Keyboard } from 'state/keyboard/state.js';
@@ -47,7 +45,7 @@ function Presets(props: Props): Node {
   };
 
   return (
-    <Card>
+    <>
       {/* eslint-disable-next-line jsx-a11y/label-has-for */}
       <label htmlFor="selectPreset">
         Or select preset:{' '}
@@ -60,7 +58,7 @@ function Presets(props: Props): Node {
           ))}
         </select>
       </label>
-    </Card>
+    </>
   );
 }
 

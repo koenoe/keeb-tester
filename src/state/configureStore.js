@@ -3,6 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+// $FlowFixMe - cannot resolve module 'redux-devtools-extension'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import history from 'utils/history.js';
