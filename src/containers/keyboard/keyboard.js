@@ -54,12 +54,12 @@ function Keyboard(props: Props): Node {
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
 
