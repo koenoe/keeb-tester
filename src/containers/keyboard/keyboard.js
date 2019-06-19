@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector, type OutputSelector } from 'reselect';
 import * as keyboardSelectors from 'state/keyboard/selectors.js';
@@ -26,11 +26,65 @@ const mapStateToProps: OutputSelector<
   keyboard: keyboardSelectors.activeKeyboard,
 });
 
+type ComponentState = {|
+  activeKeys: Array<string>,
+  pressedKeys: Array<string>,
+|};
+
+type Action =
+  | {|
+      type: 'reset',
+    |}
+  | {|
+      type: 'add-active-key',
+      key: string,
+    |}
+  | {|
+      type: 'add-pressed-key',
+      key: string,
+    |};
+
+const initialState: ComponentState = {
+  activeKeys: [],
+  pressedKeys: [],
+};
+
+function reducer(state: ComponentState, action: Action) {
+  switch (action.type) {
+    case 'add-active-key': {
+      return {
+        ...state,
+        activeKeys: [...state.activeKeys, action.key],
+      };
+    }
+    case 'add-pressed-key': {
+      return {
+        ...state,
+        activeKeys: [],
+        pressedKeys: [...state.pressedKeys, action.key],
+      };
+    }
+    case 'reset': {
+      return initialState;
+    }
+    default:
+      throw new Error(`Bad action: ${action.type}`);
+  }
+}
+
 function Keyboard(props: Props): Node {
   const { keyboard } = props;
 
   if (!keyboard) {
     return null;
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const previousKeyboard = useRef<KeyboardState>(keyboard);
+
+  if (previousKeyboard.current && previousKeyboard.current !== keyboard) {
+    dispatch({ type: 'reset' });
+    previousKeyboard.current = keyboard;
   }
 
   const {
@@ -42,15 +96,27 @@ function Keyboard(props: Props): Node {
     width,
   } = keyboard;
 
+  const { activeKeys, pressedKeys } = state;
+
   const handleKeyDown = (e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('handleKeyDown', e);
+
+    dispatch({
+      type: 'add-active-key',
+      key: e.key,
+    });
   };
   const handleKeyUp = (e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
     console.log('handleKeyUp', e);
+
+    dispatch({
+      type: 'add-pressed-key',
+      key: e.key,
+    });
   };
 
   useEffect(() => {
@@ -79,6 +145,22 @@ function Keyboard(props: Props): Node {
           <Keycap
             // eslint-disable-next-line react/no-array-index-key
             key={index}
+            isActive={Boolean(
+              activeKeys.some(activeKey =>
+                keycap.legends.find(
+                  legend =>
+                    legend.label.toLowerCase() === activeKey.toLowerCase(),
+                ),
+              ),
+            )}
+            isPressed={Boolean(
+              pressedKeys.some(pressedKey =>
+                keycap.legends.find(
+                  legend =>
+                    legend.label.toLowerCase() === pressedKey.toLowerCase(),
+                ),
+              ),
+            )}
             {...keycap}
           />
         ))}
