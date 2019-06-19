@@ -48,7 +48,7 @@ function Presets(props: Props): Node {
     <>
       {/* eslint-disable-next-line jsx-a11y/label-has-for */}
       <label htmlFor="selectPreset">
-        Or select preset:{' '}
+        or select preset:{' '}
         <select id="selectPreset" onChange={handleChange}>
           <option>---</option>
           {presets.map((preset, index) => (

@@ -82,11 +82,12 @@ function Upload(props: Props): Node {
   }, [value, updateKeyboard]);
 
   return (
-    <>
-      <input type="file" accept=".json" onChange={handleChange} />
+    <label htmlFor="upload">
+      upload KLE layout:{' '}
+      <input id="layout" type="file" accept=".json" onChange={handleChange} />
       {error && <p>{error.toString()}</p>}
       {isDebugMode() && value && <pre>{value}</pre>}
-    </>
+    </label>
   );
 }
 

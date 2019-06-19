@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector, type OutputSelector } from 'reselect';
 import * as keyboardSelectors from 'state/keyboard/selectors.js';
@@ -41,6 +41,27 @@ function Keyboard(props: Props): Node {
     keycaps,
     width,
   } = keyboard;
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('handleKeyDown', e);
+  };
+  const handleKeyUp = (e: KeyboardEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('handleKeyUp', e);
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   return (
     <div
